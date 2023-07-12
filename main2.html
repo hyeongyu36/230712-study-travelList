@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>숫자 추가하기</title>
+    <style>
+      table,
+      td {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      td {
+        padding: 5px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <input type="text" id="inputNumber" placeholder="숫자를 입력하세요." />
+    <button onclick="addNumber()">추가</button>
+    <div id="arrayTable"></div>
+
+    <script>
+      var numbers = [];
+      var arrayTable = document.querySelector("#arrayTable");
+
+      function addNumber() {
+        var input = document.querySelector("#inputNumber");
+        var inputValue = input.value.trim(); //앞뒤 공백 제거(입력된 값을 가져옴)
+        var number = parseInt(inputValue); //입력된 값을 정수로 변환
+        if (!isNaN(number)) {
+          numbers.push(number); //배열에 숫자를 추가
+          showArray();
+          input.value = ""; //입력 필드를 초기화
+          input.focus(); //입력 필드에 포커스
+        } else {
+          alert("유효한 숫자를 입력하세요.");
+        }
+      }
+      function showArray() {
+        var str = `<table><tr>`;
+        for (var i = 0; i < numbers.length; i++) {
+          str += `<td> ${numbers[i]}</td>`;
+        }
+        str += `</tr></table>`;
+        arrayTable.innerHTML = str;
+      }
+    </script>
+  </body>
+</html>
